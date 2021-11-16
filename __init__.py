@@ -1,5 +1,5 @@
 import bpy
-from . operator import RenderNFTOperator
+from . operator import RenderNFTOperator, PrepareNFTOperator
 from . panel import NFTGEN_PT_Panel
 
 # This program is free software; you can redistribute it and/or modify
@@ -29,6 +29,13 @@ bl_info = {
 def register():
     bpy.utils.register_class(NFTGEN_PT_Panel)
     bpy.utils.register_class(RenderNFTOperator)
+    bpy.utils.register_class(PrepareNFTOperator)
+
+    bpy.types.Scene.theChosenObject = bpy.props.PointerProperty(type=bpy.types.Collection)
+
 def unregister():
     bpy.utils.unregister_class(NFTGEN_PT_Panel)
     bpy.utils.unregister_class(RenderNFTOperator)
+    bpy.utils.unregister_class(PrepareNFTOperator)
+
+    del bpy.types.Object.theChosenObject

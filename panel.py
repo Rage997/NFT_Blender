@@ -13,9 +13,18 @@ class NFTGEN_PT_Panel(bpy.types.Panel):
 
         layout = self.layout
 
-        row = layout.row()
+        row = layout.box()
         row.label(text="NFT Generator Addon")
-
+        row = layout.box()
+        row.label(text="Select Feature Collections")
+        row.label(text="Prepare: it loads the features into the system and checks for erros")
+        
+        row.prop(context.scene, "theChosenObject")
+        print('Selected: {}'.format(bpy.types.Scene.theChosenObject))
+        
+        
+        row.operator("object.prepare_nft")
+        
 
         box = layout.box()
         box.label(text="Render All NFT!")
