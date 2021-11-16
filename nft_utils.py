@@ -65,7 +65,8 @@ def prepare():
         raise Exception('Error')
 
 def generate_permutations(my_dict):
-    """Generates all the permutations key/item of a dictionary.
+    """Generates all the permutations key/item of a dictionary.See: 
+        https://stackoverflow.com/questions/38721847/how-to-generate-all-combination-from-values-in-dict-of-lists-in-python
 
     Args:
         my_dict ([any]): Input dictionary. Each key corresponds to an array of objects
@@ -73,7 +74,7 @@ def generate_permutations(my_dict):
     Returns:
         dict([]): Return a dictionary (? check)
     """    ''''''
-    # see: https://stackoverflow.com/questions/38721847/how-to-generate-all-combination-from-values-in-dict-of-lists-in-python
+
     keys, values = zip(*my_dict.items())
     permutations_dicts = [dict(zip(keys, v)) for v in itertools.product(*values)]
     return permutations_dicts
@@ -85,18 +86,11 @@ def render_all():
     all_NFT = generate_permutations(feature_to_obj)
     idx = 0
     for nft in all_NFT:
-#        objs = nft.values
-        # get NFT name
         nft_name = ''
         nft_json = {}
         for feature in nft.keys():
-#            nft_name += str(feature) +'_'
-#            nft_name += nft[feature].name_full +'-'
             nft_json[feature] = nft[feature].name_full
-        
-#        nft_name = nft_name[:-1] # remove last '-'
         nft_name = '_'.join(nft_json.values())
-#        nft_name = "ciao"
         print('Rendering NFT {}'.format(nft_name))
         
         objs = list(nft.values())
